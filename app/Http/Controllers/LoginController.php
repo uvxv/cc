@@ -23,4 +23,12 @@ class LoginController extends Controller
             'failed' => 'The provided credentials do not match our records.',
         ]);
     }
+
+    public function logout(Request $request)
+    {  
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
 }
