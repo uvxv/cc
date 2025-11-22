@@ -3,11 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
-Route::get('/login', [LoginController::class, 'index'])
-->name('login.index');
 
-Route::post('/login', [LoginController::class, 'authenticate'])
-->name('login.authenticate');
-
-Route::post('/logout', [LoginController::class, 'logout'])
-->name('login.logout');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login.index');
+    Route::post('/login', 'authenticate')->name('login.authenticate');
+    Route::post('/logout', 'logout')->name('login.logout');
+});
