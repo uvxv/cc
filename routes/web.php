@@ -9,3 +9,5 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'authenticate')->name('login.authenticate');
     Route::post('/logout', 'logout')->name('login.logout');
 });
+
+Route::view('/', 'home')->name('home');
