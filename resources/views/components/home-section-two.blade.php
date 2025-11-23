@@ -7,8 +7,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Feature 1: Physical to Digital -->
-                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-[#0E3CBD]">
+                <!--  Physical to Digital div -->
+                <div class="bg-white  p-8 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-[#0E3CBD]">
                     <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6">
                         <!-- Heroicon: Device Phone Mobile -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#0E3CBD] w-6 h-6">
@@ -19,7 +19,7 @@
                     <p class="text-[#5E5E5E]">Instantly convert your existing physical card into a legally recognized digital license accessible via your smartphone.</p>
                 </div>
 
-                <!-- Feature 2: New Applicants -->
+                <!-- New Applicants div -->
                 <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-[#848484]">
                     <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
                         <!-- Heroicon: User Plus -->
@@ -34,7 +34,7 @@
                 <!-- Feature 3: Exam Scheduling -->
                 <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-[#0E3CBD]">
                     <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6">
-                        <!-- Heroicon: Calendar Days -->
+                        
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-[#0E3CBD] w-6 h-6">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zM14.25 15h.008v.008H14.25V15zm0 2.25h.008v.008H14.25v-.008zM16.5 15h.008v.008H16.5V15zm0 2.25h.008v.008H16.5v-.008z" />
                         </svg>

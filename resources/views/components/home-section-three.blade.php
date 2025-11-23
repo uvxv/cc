@@ -31,7 +31,7 @@
 
                                 <x-bladewind.button 
                                     tag="a" 
-                                    {{-- href="{{ route('register') }}" --}}
+                                    href="{{ route('register.index') }}"
                                     size="small"
                                     outline="true"
                                     color="white">

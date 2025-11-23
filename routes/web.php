@@ -10,4 +10,8 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/logout', 'logout')->name('login.logout');
 });
 
+Route::get('/register', function () {
+    return view('register');
+})->name('register.index');
+
 Route::view('/', 'home')->name('home');

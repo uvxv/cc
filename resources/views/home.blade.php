@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head>E-Licensing Sri Lanka</x-head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-Licensing Sri Lanka</title>
+    <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
+    <!-- Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 <body class="bg-gray-50 text-[#1C1C1C] flex flex-col min-h-screen">
 
     <!-- Header -->
@@ -16,7 +25,8 @@
             
             <nav>
                 @if (!Auth::check())
-                    <a href="#auth-section" class="text-sm font-bold hover:text-gray-200 transition">Login / Register</a>
+                    <a href="{{ route('login.index') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Login</a>
+                    <a href="{{ route('register.index') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Register</a>
                 @endif
                 <!-- Static Preview Link -->
             </nav>
