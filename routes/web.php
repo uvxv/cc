@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 
 Route::controller(LoginController::class)->group(function () {
@@ -10,8 +11,10 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/logout', 'logout')->name('login.logout');
 });
 
-Route::get('/register', function () {
-    return view('register');
-})->name('register.index');
-
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'index')->name('register.index');
+    Route::post('/register', 'store')->name('register.store');
+});
 Route::view('/', 'home')->name('home');
+
+
