@@ -1,7 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login.index');
+    Route::post('/login', 'authenticate')->name('login.authenticate');
+    Route::post('/logout', 'logout')->name('login.logout');
 });
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register.index');
+
+Route::view('/', 'home')->name('home');
