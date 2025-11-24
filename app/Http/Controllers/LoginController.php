@@ -16,7 +16,7 @@ class LoginController extends Controller
         $credentials = $request->only('nic', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+            return redirect()->route('userdashboard.index')->with('name', Auth::user()->first_name);
         }
 
         return back()->withErrors([
@@ -29,6 +29,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('home');
     }
 }
