@@ -11,8 +11,7 @@
 <body class="bg-gray-50 text-[#1a1a1a] antialiased">
 
     <!-- Main Container: Centered horizontally and vertically -->
-    <div class="min-h-screen flex items-center justify-center p-4">
-        
+    <div class="min-h-screen flex items-center justify-center p-4">       
         <!-- Login Card -->
         <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 sm:p-12 border border-gray-100">
             
@@ -21,6 +20,11 @@
                 <h1 class="text-3xl font-bold tracking-tight text-[#1a1a1a]">
                     Welcome back!
                 </h1>
+            @error('login_message')
+                <x-bladewind::alert>
+                    {{ $message }}
+                </x-bladewind::alert>        
+            @enderror                
                 <p class="text-sm text-[#888888]">
                     Enter your credentials to access your account
                 </p>
@@ -102,7 +106,7 @@
                 <div class="text-center mt-6">
                     <p class="text-sm text-[#555555]">
                         Don't have an account? 
-                        <a href="#" class="font-semibold text-[#0044cc] hover:text-[#29abe2] transition-colors">
+                        <a href="{{route('register.index')}}" class="font-semibold text-[#0044cc] hover:text-[#29abe2] transition-colors">
                             Register
                         </a>
                     </p>

@@ -50,8 +50,8 @@
                     <p class="text-[#5E5E5E]">Please enter your details to register for the licensing system.</p>
                 </div>
 
-                <form action="/register" method="POST" enctype="multipart/form-data" class="space-y-6">
-                    
+                <form action="{{ route('register.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    @csrf     
                     <!-- Name Row -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- First Name -->
@@ -65,7 +65,7 @@
                                 </div>
                                 <input type="text" id="firstname" name="firstname" required
                                     class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-[#0E3CBD] focus:ring-2 focus:ring-[#0E3CBD]/20 outline-none transition-all placeholder-[#848484] text-[#1C1C1C]"
-                                    placeholder="Saman">
+                                    placeholder="Saman" value="{{ old('firstname') }}">
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@
                                 </div>
                                 <input type="text" id="lastname" name="lastname" required
                                     class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-[#0E3CBD] focus:ring-2 focus:ring-[#0E3CBD]/20 outline-none transition-all placeholder-[#848484] text-[#1C1C1C]"
-                                    placeholder="Perera">
+                                    placeholder="Perera" value="{{ old('lastname') }}">
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                             </div>
                             <input type="text" id="address" name="address"
                                 class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-[#0E3CBD] focus:ring-2 focus:ring-[#0E3CBD]/20 outline-none transition-all placeholder-[#848484] text-[#1C1C1C]"
-                                placeholder="No. 123, Galle Road, Colombo 03">
+                                placeholder="No. 123, Galle Road, Colombo 03" value="{{ old('address') }}">
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@
                             </div>
                             <input type="email" id="email" name="email" required
                                 class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-[#0E3CBD] focus:ring-2 focus:ring-[#0E3CBD]/20 outline-none transition-all placeholder-[#848484] text-[#1C1C1C]"
-                                placeholder="name@example.lk">
+                                placeholder="name@example.lk" value="{{ old('email') }}">
                         </div>
                     </div>
 
@@ -150,6 +150,12 @@
                             </div>
                         </div>
                     </div>
+                    @error('password')
+                        <x-bladewind::alert
+                            type="warning">
+                            {{ $message }}
+                        </x-bladewind::alert>
+                    @enderror
 
                     <!-- Native Image Upload (No JS) -->
                     <div class="space-y-2">
@@ -181,7 +187,7 @@
                     <div class="text-center">
                         <p class="text-sm text-[#5E5E5E]">
                             Already have an account? 
-                            <a href="#" class="font-semibold text-[#0E3CBD] hover:text-[#259FDE] transition-colors">Log in here</a>
+                            <a href="{{ route('login.index') }}" class="font-semibold text-[#0E3CBD] hover:text-[#259FDE] transition-colors">Log in here</a>
                         </p>
                     </div>
                 </form>
