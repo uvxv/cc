@@ -16,6 +16,9 @@ class RegisterController extends Controller
         if($request->password !== $request->password_confirmation){
             return back()->withErrors(['password' => 'Password confirmation does not match.'])->withInput();
         }
+        if(User::where('email', $request->email)->exists()){
+            return redirect()->route('login.index')->withErrors(['login_message' => 'Email already exists.'])->withInput();
+        }
         $validatedData = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
