@@ -20,11 +20,17 @@
                 <h1 class="text-3xl font-bold tracking-tight text-[#1a1a1a]">
                     Welcome back!
                 </h1>
-            @error('login_message')
+            @error('register_message')
                 <x-bladewind::alert>
                     {{ $message }}
                 </x-bladewind::alert>        
-            @enderror                
+            @enderror
+            @if (session('success'))
+                <x-bladewind::alert
+                    type="success">
+                    {{ session('success') }}
+                </x-bladewind::alert>
+            @endif                
                 <p class="text-sm text-[#888888]">
                     Enter your credentials to access your account
                 </p>
