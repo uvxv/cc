@@ -18,7 +18,7 @@
         <div class="absolute top-1/4 right-10 w-64 h-64 bg-[#259FDE] opacity-20 rounded-full blur-2xl"></div>
 
         <div class="relative text-center px-12 text-white">
-        <div class="mb-6 w-full md:w-64 flex items-center justify-center">
+        <div class="mb-6 w-full md:w-96 lg:w-96 flex items-center justify-center">
             <x-card-illustration />
         </div>
             <h2 class="text-4xl font-bold tracking-tight mb-4">E-Licensing Portal</h2>
