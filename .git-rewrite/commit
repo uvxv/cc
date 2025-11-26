@@ -1,0 +1,6 @@
+tree b5837a62d53ca89d35df3f25cfc3814831811142
+parent 363632165cf5155b2900eec768a4f7391072ec1d
+author Taylor Otwell <taylorotwell@gmail.com> 1327951113 -0600
+committer Taylor Otwell <taylorotwell@gmail.com> 1327951113 -0600
+
+added event firing when bundle is started.
