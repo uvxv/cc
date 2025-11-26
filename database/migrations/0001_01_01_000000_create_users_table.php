@@ -15,23 +15,12 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->string('first_name');
             $table->string('last_name');
-            // $table->integer('nic')->unique()->nullable();
             $table->string('email')->unique();
-<<<<<<< HEAD
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-<<<<<<< HEAD
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
-=======
->>>>>>> b1374f8031468a2bcc639952d12412ca3ecc40c4
-=======
             $table->string('address');
             $table->string('image')->nullable();
             $table->string('password', 255);
             $table->rememberToken()->nullable();
->>>>>>> 770119e2cf017e5cdfb4cda89193a909f3bc1955
             $table->timestamps();
         });
 
