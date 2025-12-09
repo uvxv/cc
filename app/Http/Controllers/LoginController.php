@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -13,7 +14,14 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('nic', 'password');
+        $credentials = $request->validate([
+            'nic' => "required|integer|max_digits:12",
+            'password' => "required|string",
+        ]);
+
+        if (!User::where('nic', $credentials['nic'])->exists()) {
+            return redirect()->route('register.index')->withErrors(['login_message' => 'NIC does not exist.'])->withInput();
+        }
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard');

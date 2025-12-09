@@ -10,10 +10,10 @@
                     </p>
                         @auth
                             <div class="py-3 inline-block">
-                                <p class="mb-4 text-gray-300">Logged in as <span class="text-white font-bold">{{ Auth::user()->name }}</span></p>
+                                <p class="mb-4 text-gray-300">Logged in</p>
                                 <x-bladewind.button 
                                     tag="a" 
-                                    {{-- href="{{ route('dashboard.index') }}" --}}
+                                    href="{{ route('userdashboard.index') }}"
                                     size="regular"
                                     color="blue">
                                     Go to Dashboard

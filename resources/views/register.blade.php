@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Licensing Registration - Sri Lanka</title>
+    <link rel="icon" type="image/jpg" href="{{ asset('storage/app/logo.jpg') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])  
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +19,7 @@
         <div class="absolute top-1/4 right-10 w-64 h-64 bg-[#259FDE] opacity-20 rounded-full blur-2xl"></div>
 
         <div class="relative text-center px-12 text-white">
-        <div class="mb-6 w-full md:w-64 flex items-center justify-center">
+        <div class="mb-6 w-full md:w-96 lg:w-96 flex items-center justify-center">
             <x-card-illustration />
         </div>
             <h2 class="text-4xl font-bold tracking-tight mb-4">E-Licensing Portal</h2>
@@ -49,6 +50,12 @@
                     <h1 class="text-3xl font-bold text-[#0E3CBD] mb-2">Create Account</h1>
                     <p class="text-[#5E5E5E]">Please enter your details to register for the licensing system.</p>
                 </div>
+                @error('login_message')
+                        <x-bladewind::alert
+                            type="warning">
+                            {{ $message }}
+                        </x-bladewind::alert>
+                @enderror
 
                 <form action="{{ route('register.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf     
@@ -117,6 +124,21 @@
                                 placeholder="name@example.lk" value="{{ old('email') }}">
                         </div>
                     </div>
+
+                    <!-- NIC -->
+                    <div class="space-y-2">
+                        <label for="nic" class="text-sm font-medium text-[#1C1C1C]">Nic<span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#848484]">
+                                <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="nic" name="nic" required
+                                class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-[#0E3CBD] focus:ring-2 focus:ring-[#0E3CBD]/20 outline-none transition-all placeholder-[#848484] text-[#1C1C1C]"
+                                placeholder="123456789" value="{{ old('nic') }}">
+                        </div>
+                    </div>                    
 
                     <!-- Password Row -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{{ asset('storage/app/logo.jpg') }}" />
     <title>Welcome Back - Login</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,11 +21,17 @@
                 <h1 class="text-3xl font-bold tracking-tight text-[#1a1a1a]">
                     Welcome back!
                 </h1>
-            @error('login_message')
+            @error('register_message')
                 <x-bladewind::alert>
                     {{ $message }}
                 </x-bladewind::alert>        
-            @enderror                
+            @enderror
+            @if (session('success'))
+                <x-bladewind::alert
+                    type="success">
+                    {{ session('success') }}
+                </x-bladewind::alert>
+            @endif                
                 <p class="text-sm text-[#888888]">
                     Enter your credentials to access your account
                 </p>
