@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->string('first_name');
             $table->string('last_name');
-            // $table->integer('nic')->unique()->nullable();
+            $table->string('nic')->unique();
             $table->string('email')->unique();
             $table->string('address');
             $table->string('image')->nullable();
