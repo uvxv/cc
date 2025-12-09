@@ -31,3 +31,22 @@
             </nav>
         </div>
     </header>
+
+    <!-- Hero Section -->
+    <x-home-section-one>
+    </x-home-section-one>
+
+    <!-- Features / Benefits Grid -->
+    <x-home-section-two>
+    </x-home-section-two>
+
+    <!-- Auth Section / CTA -->
+    <x-home-section-three>
+    </x-home-section-three>
+
+    <!-- Footer -->
+    <x-home-footer>
+    </x-home-footer>
+    <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
+</body>
+</html>
