@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - E-Licensing Sri Lanka</title>
+    <link rel="icon" type="image/jpg" href="{{ asset('storage/app/logo.jpg') }}" />
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
     <!-- Font: Inter -->
@@ -28,26 +28,6 @@
                     <a href="{{ route('login.index') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Login</a>
                     <a href="{{ route('register.index') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Register</a>
                 @endif
-                <!-- Static Preview Link -->
             </nav>
         </div>
     </header>
-
-    <!-- Hero Section -->
-    <x-home-section-one>
-    </x-home-section-one>
-
-    <!-- Features / Benefits Grid -->
-    <x-home-section-two>
-    </x-home-section-two>
-
-    <!-- Auth Section / CTA -->
-    <x-home-section-three>
-    </x-home-section-three>
-
-    <!-- Footer -->
-    <x-home-footer>
-    </x-home-footer>
-    <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
-</body>
-</html>

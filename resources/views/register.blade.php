@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Licensing Registration - Sri Lanka</title>
+    <link rel="icon" type="image/jpg" href="{{ asset('storage/app/logo.jpg') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])  
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">

@@ -37,6 +37,7 @@ class RegisterController extends Controller
 
         if ($request->hasFile('id_image')) {
             // store on default disk (uses FILESYSTEM_DISK from .env)
+            // For other devs: make sure to set up your filesystem properly
             $image = $request->file('id_image')->store('nic');
             $user->image = $image;
             $user->save();
