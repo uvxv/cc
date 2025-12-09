@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\UserDashboardController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login.index');
@@ -17,4 +17,6 @@ Route::controller(RegisterController::class)->group(function () {
 });
 Route::view('/', 'home')->name('home');
 
-
+Route::get('/userdashboard', [UserDashboardController::class, 'index'])
+-> middleware('auth')
+->name('userdashboard.index');
