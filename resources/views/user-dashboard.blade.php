@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +38,7 @@
         
         <!-- Welcome Section -->
         <div class="mb-8">
-            <h1 class="text-2xl font-bold text-brand-dark">Hello {{ session('name') }}!</h1>
+            <h1 class="text-2xl font-bold text-brand-dark">Hello {{ auth()->user()->first_name}}!</h1>
             <p class="text-brand-gray font-bold mt-1 text-sm">Manage your digital license and traffic fines.</p>
         </div>
 
@@ -56,9 +57,7 @@
                             Digital Driving License
                         </h2>
                         
-                        <!-- 
-                            {{-- BLADE LOGIC: @if($hasLicense)  --}}
-                        -->
+                        @if(!auth()->user()->license())
                         <button onclick="document.getElementById('qr-modal').classList.remove('hidden')" class="text-brand-blue text-sm font-medium hover:text-brand-light flex items-center transition">
                                 
                                 <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
@@ -68,42 +67,24 @@
 
                             Show QR
                         </button>
-                        {{-- <!-- BLADE: @endif --> --}}
+                        @endif
                     </div>
 
                     <!-- Card Wrapper -->
+                    @if (Auth::user()->license()->doesntExist())
+                    <div class="space-y-2 z-10 relative ">
+                        <button class="w-full bg-brand-blue hover:bg-blue-700 hover:text-white text-black text-sm font-medium py-2.5 rounded-lg transition shadow-md shadow-brand-blue/20">
+                            Add Physical Card
+                        </button>
+                        <button class="w-full bg-brand-blue hover:bg-blue-700 hover:text-white text-black text-sm font-medium py-2.5 rounded-lg transition shadow-md shadow-brand-blue/20">
+                            Apply Online
+                        </button>
+                    </div>  
+                    @endif
+                    
+                    @if (Auth::user()->license()->exists())
                     <div class="relative w-full max-w-md mx-auto aspect-[1.586/1] rounded-xl shadow-2xl overflow-hidden transition-all duration-500">
-                        
-                        <!-- 
-                            {{-- BLADE LOGIC: @if(!$hasLicense)  --}}
-                            Change 'hidden' to 'flex' below if NO license is found
-                        -->
-                        <div id="no-license-overlay" class="hidden absolute inset-0 z-20 flex-col items-center justify-center bg-white/30 backdrop-blur-sm transition-all duration-300">
-                            <div class="bg-white p-6 rounded-xl shadow-xl text-center max-w-xs w-full mx-4 border border-gray-100">
-                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 text-brand-gray">
-                                    <!-- Icon: File X -->
-                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                </div>
-                                <h3 class="font-bold text-brand-dark mb-1">No License Detected</h3>
-                                <p class="text-xs text-brand-muted mb-4">Link an existing physical card or apply for a new learner's permit.</p>
-                                
-                                <div class="space-y-2">
-                                    <button class="w-full bg-brand-blue hover:bg-blue-700 text-white text-sm font-medium py-2.5 rounded-lg transition shadow-md shadow-brand-blue/20">
-                                        Add Physical Card
-                                    </button>
-                                    <button class="w-full bg-white hover:bg-gray-50 text-brand-dark border border-gray-200 text-sm font-medium py-2.5 rounded-lg transition">
-                                        Apply Online
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 
-                            BLADE LOGIC: 
-                            {{-- Add class 'license-blur' to the div below if @if(!$hasLicense)  --}}
-                        -->
+                        {{-- Driving License Card --}}
                         <div class="w-full h-full relative p-5 sm:p-6 text-white flex flex-col justify-between bg-gradient-to-br from-[#0E3CBD] to-[#06216e]">
                             
                             <!-- Background Decoration -->
@@ -125,8 +106,8 @@
                                     <span class="px-1.5 py-0.5 rounded bg-white/20 text-[10px] font-bold border border-white/10">B</span>
                                     <span class="px-1.5 py-0.5 rounded bg-white/20 text-[10px] font-bold border border-white/10">B1</span>
                                 </div>
-                            </div>
 
+                            </div>
                             <!-- Chip & Number -->
                             <div class="flex justify-between items-center my-2 z-10">
                                 <div class="w-10 h-8 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded-md shadow-inner border border-yellow-600/30 opacity-90"></div>
@@ -157,16 +138,15 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="mt-6 flex justify-center text-xs text-brand-muted text-center">
                         <p class="max-w-xs">This digital license is legally recognized by the Sri Lanka Police Department under the E-Motoring Act of 2024.</p>
                     </div>
+                    @endif
                 </div>
             </div>
 
             <!-- Right Column: Stats & Penalties -->
-            <div class="lg:col-span-5 space-y-6">
-                
+            <div class="lg:col-span-5 space-y-6">     
                 <!-- Quick Stats -->
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center text-center group hover:border-brand-blue/30 transition cursor-pointer">
@@ -191,58 +171,11 @@
                     </div>
                 </div>
 
-                <!-- 
-                   {{-- BLADE LOGIC: @if($hasLicense && count($fines) > 0)  --}}
-                -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="p-4 border-b border-gray-50 flex justify-between items-center">
-                        <h3 class="font-semibold text-brand-dark text-sm flex items-center">
-                            <!-- Icon: Alert -->
-                            <svg class="w-4 h-4 mr-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                            Traffic Fines & Penalties
-                        </h3>
-                        <span class="bg-orange-100 text-orange-700 text-[10px] px-2 py-0.5 rounded-full font-bold">1 Active</span>
-                    </div>
-                    
-                    <div class="divide-y divide-gray-50">
-                        <!-- Item 1: Pending -->
-                        <div class="p-4 hover:bg-gray-50 transition">
-                            <div class="flex justify-between items-start mb-1">
-                                <span class="text-xs font-bold text-brand-dark">Speeding (60-80kmph)</span>
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-yellow-100 text-yellow-700">Pending</span>
-                            </div>
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <div class="text-[10px] text-brand-muted">Loc: Colombo 03 • 24 Nov 2025</div>
-                                    <div class="text-[10px] text-brand-muted">Ref: #SLP-99283</div>
-                                </div>
-                                <button class="text-xs bg-brand-dark text-white px-3 py-1.5 rounded hover:bg-black transition">Pay 3,000 LKR</button>
-                            </div>
-                        </div>
 
-                        <!-- Item 2: Processed -->
-                        <div class="p-4 hover:bg-gray-50 transition opacity-60">
-                            <div class="flex justify-between items-start mb-1">
-                                <span class="text-xs font-bold text-brand-gray">Illegal Parking</span>
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-green-100 text-green-700 flex items-center">
-                                    <!-- Icon: Check -->
-                                    <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Paid
-                                </span>
-                            </div>
-                            <div class="text-[10px] text-brand-muted">Loc: Kandy • 12 Aug 2024</div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-3 bg-gray-50 text-center border-t border-gray-100">
-                        <a href="#" class="text-xs font-medium text-brand-blue hover:text-brand-dark transition">View all history &rarr;</a>
-                    </div>
-                </div>
-                {{-- <!-- BLADE LOGIC: @endif --> --}}
+                @if (Auth::user()->license()->exists())
+                    <livewire:penalty-panel />
+                @endif
+                
             </div>
         </div>
     </main>

@@ -14,6 +14,7 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        $user = null;
         $credentials = $request->validate([
             'nic' => "required|integer|max_digits:12",
             'password' => "required|string",
@@ -24,7 +25,8 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('userdashboard.index')->with('name', Auth::user()->first_name);
+            $request->session()->regenerate();
+            return redirect()->route('userdashboard.index')->with('user', Auth::user());
         }
 
         return back()->withErrors([

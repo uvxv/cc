@@ -49,4 +49,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function license()
+    {
+        return $this->hasOne(License::class, 'user_id', 'id');
+    }
+
+    public function penalties()
+    {
+        return $this->hasMany(Penalty::class, 'user_id', 'id');
+    }
 }
