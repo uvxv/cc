@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\ApplyForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -20,3 +21,7 @@ Route::view('/', 'home')->name('home');
 Route::get('/userdashboard', [UserDashboardController::class, 'index'])
 -> middleware('auth')
 ->name('userdashboard.index');
+
+Route::get('apply', ApplyForm::class)
+-> middleware('auth')
+->name('apply.form');

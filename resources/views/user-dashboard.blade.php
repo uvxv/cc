@@ -43,12 +43,16 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
+            @if (Auth::user()->license()->doesntExist())
+                <x-license-apply/>
+            @endif 
             <!-- Left Column: Driving License -->
-            <div class="lg:col-span-7 space-y-6">
-                
+            @if (Auth::user()->license()->exists())
+            <div class="lg:col-span-7 space-y-6">        
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative p-6">
+                    <!-- Card Wrapper -->               
                     <div class="flex justify-between items-center mb-4">
+                        @if(!auth()->user()->license())
                         <h2 class="text-lg font-semibold text-brand-dark flex items-center">
                             <!-- Icon: Badge Check -->
                             <svg class="w-5 h-5 mr-2 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,8 +60,6 @@
                             </svg>
                             Digital Driving License
                         </h2>
-                        
-                        @if(!auth()->user()->license())
                         <button onclick="document.getElementById('qr-modal').classList.remove('hidden')" class="text-brand-blue text-sm font-medium hover:text-brand-light flex items-center transition">
                                 
                                 <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
@@ -69,20 +71,6 @@
                         </button>
                         @endif
                     </div>
-
-                    <!-- Card Wrapper -->
-                    @if (Auth::user()->license()->doesntExist())
-                    <div class="space-y-2 z-10 relative ">
-                        <button class="w-full bg-brand-blue hover:bg-blue-700 hover:text-white text-black text-sm font-medium py-2.5 rounded-lg transition shadow-md shadow-brand-blue/20">
-                            Add Physical Card
-                        </button>
-                        <button class="w-full bg-brand-blue hover:bg-blue-700 hover:text-white text-black text-sm font-medium py-2.5 rounded-lg transition shadow-md shadow-brand-blue/20">
-                            Apply Online
-                        </button>
-                    </div>  
-                    @endif
-                    
-                    @if (Auth::user()->license()->exists())
                     <div class="relative w-full max-w-md mx-auto aspect-[1.586/1] rounded-xl shadow-2xl overflow-hidden transition-all duration-500">
                         {{-- Driving License Card --}}
                         <div class="w-full h-full relative p-5 sm:p-6 text-white flex flex-col justify-between bg-gradient-to-br from-[#0E3CBD] to-[#06216e]">
@@ -141,42 +129,13 @@
                     <div class="mt-6 flex justify-center text-xs text-brand-muted text-center">
                         <p class="max-w-xs">This digital license is legally recognized by the Sri Lanka Police Department under the E-Motoring Act of 2024.</p>
                     </div>
-                    @endif
                 </div>
             </div>
-
+            @endif
             <!-- Right Column: Stats & Penalties -->
-            <div class="lg:col-span-5 space-y-6">     
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center text-center group hover:border-brand-blue/30 transition cursor-pointer">
-                        <div class="w-10 h-10 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <!-- Icon: History -->
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <span class="text-sm font-semibold text-brand-dark">Renewals</span>
-                        <span class="text-xs text-brand-muted">Due in 8 yrs</span>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center text-center group hover:border-brand-blue/30 transition cursor-pointer">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <!-- Icon: Check Circle -->
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <span class="text-sm font-semibold text-brand-dark">Points</span>
-                        <span class="text-xs text-brand-muted">20/20 Merits</span>
-                    </div>
-                </div>
-
-
                 @if (Auth::user()->license()->exists())
-                    <livewire:penalty-panel />
+                    <x-penalty-panel/>
                 @endif
-                
-            </div>
         </div>
     </main>
 
