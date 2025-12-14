@@ -20,7 +20,7 @@ class RegisterController extends Controller
             'nic' => 'required|string|max:50',
             'password' => 'required|string|min:8|confirmed',
             'address' => 'nullable|string|max:500',
-            'id_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if($request->password !== $request->password_confirmation){
