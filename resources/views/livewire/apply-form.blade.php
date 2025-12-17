@@ -20,7 +20,7 @@
                     <div class="relative z-10 bg-white p-1 rounded-full">
                         <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors duration-300 border-2"
                              :class="$wire.currentStep >= 1 ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-300 bg-white text-slate-500'">
-                            <span x-show="$wire.currentStep > 1"><i class="fas fa-check"></i></span>
+                            <span x-show="$wire.currentStep > 1"><i class="fas fa-check">1</i></span>
                             <span x-show="$wire.currentStep <= 1">1</span>
                         </div>
                     </div>
@@ -90,26 +90,62 @@
 
                     <!-- Step 2 Content -->
                     <div x-show="$wire.currentStep === 2" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0">
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">Personal Profile</h3>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">Medical </h3>
                         <div class="space-y-5">
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-                                <input type="text" wire:model="name" class="block w-full rounded-lg border-slate-300 bg-slate-50 border focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 px-3 shadow-sm" placeholder="John Doe">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Province / Area</label>
+                                <select wire:model="area" class="block w-full rounded-lg border-slate-300 bg-slate-50 border focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 px-3 shadow-sm">
+                                    <option value="">Select Province</option>
+                                    <option value="Western">Western</option>
+                                    <option value="Central">Central</option>
+                                    <option value="Southern">Southern</option>
+                                    <option value="Northern">Northern</option>
+                                    <option value="Eastern">Eastern</option>
+                                    <option value="North Western">North Western</option>
+                                    <option value="North Central">North Central</option>
+                                    <option value="Uva">Uva</option>
+                                    <option value="Sabaragamuwa">Sabaragamuwa</option>
+                                </select>
+                                @error('area') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
-                                <select wire:model="role" class="block w-full rounded-lg border-slate-300 bg-slate-50 border focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 px-3 shadow-sm">
-                                    <option value="developer">Developer</option>
-                                    <option value="designer">Designer</option>
-                                    <option value="manager">Manager</option>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Blood Type</label>
+                                <select wire:model="blood_type" class="block w-full rounded-lg border-slate-300 bg-slate-50 border focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 px-3 shadow-sm">
+                                    <option value="">Select Blood Type</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
                                 </select>
+                                @error('blood_type') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Short Bio</label>
-                                <textarea wire:model="bio" rows="3" class="block w-full rounded-lg border-slate-300 bg-slate-50 border focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 px-3 shadow-sm" placeholder="Tell us about yourself..."></textarea>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Vehicle Group</label>
+                                <select wire:model="vehicle_group" class="block w-full rounded-lg border-slate-300 bg-slate-50 border focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 px-3 shadow-sm">
+                                    <option value="">Select Vehicle Group</option>
+                                    <option value="motorcycle">Motorcycle</option>
+                                    <option value="motorcar">Motorcar / Light Motor Vehicle</option>
+                                    <option value="three_wheeler">Three-Wheeler</option>
+                                    <option value="light_goods_vehicle">Light Goods Vehicle</option>
+                                    <option value="heavy_goods_vehicle">Heavy Goods Vehicle</option>
+                                    <option value="bus">Bus / Passenger Vehicle</option>
+                                    <option value="tractor">Tractor</option>
+                                    <option value="invalid_carriage">Invalid Carriage</option>
+                                </select>
+                                @error('vehicle_group') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                             </div>
+
+                        </div>
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Upload Medical Certificate</label>
+                            <input type="file" wire:model="medical_image" class="block w-full text-sm text-slate-500 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 focus:border-indigo-500 focus:ring-indigo-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 transition cursor-pointer">
+                            @error('medical_image') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -121,15 +157,31 @@
                             <dl class="space-y-4">
                                 <div class="flex justify-between">
                                     <dt class="text-sm font-medium text-slate-500">Email</dt>
-                                    <dd class="text-sm font-semibold text-slate-900">mai</dd>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ auth()->user()->email }}</dd>
                                 </div>
                                 <div class="flex justify-between">
                                     <dt class="text-sm font-medium text-slate-500">Name</dt>
-                                    <dd class="text-sm font-semibold text-slate-900">he</dd>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ auth()->user()->name }}</dd>
                                 </div>
                                 <div class="flex justify-between">
-                                    <dt class="text-sm font-medium text-slate-500">Role</dt>
-                                    <dd class="text-sm font-semibold text-slate-900 capitalize">role</dd>
+                                    <dt class="text-sm font-medium text-slate-500">Phone</dt>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ $phone ?? '—' }}</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt class="text-sm font-medium text-slate-500">Province</dt>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ $province ?? '—' }}</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt class="text-sm font-medium text-slate-500">Area</dt>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ $area ?? '—' }}</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt class="text-sm font-medium text-slate-500">Blood Type</dt>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ $blood_type ?? '—' }}</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt class="text-sm font-medium text-slate-500">Vehicle Group</dt>
+                                    <dd class="text-sm font-semibold text-slate-900 capitalize">{{ $vehicle_group ?? '—' }}</dd>
                                 </div>
                             </dl>
                         </div>

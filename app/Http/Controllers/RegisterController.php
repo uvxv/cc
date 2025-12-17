@@ -19,7 +19,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255',
             'nic' => 'required|string|max:50',
             'password' => 'required|string|min:8|confirmed',
-            'address' => 'nullable|string|max:500',
+            'address' => 'required|string|max:500',
             'id_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -38,13 +38,14 @@ class RegisterController extends Controller
             'nic' => $validatedData['nic'],
             'password' => bcrypt($validatedData['password']),
             'address' => $validatedData['address'] ?? null,
+            
         ]);
 
         if ($request->hasFile('id_image')) {
             // store on default disk (uses FILESYSTEM_DISK from .env)
             // For other devs: make sure to set up your filesystem properly
-            $image = $request->file('id_image')->store('nic');
-            $user->image = $image;
+            $image = $request->file('id_image')->store('Nic', 'public');
+            $user->image = basename($image);
             $user->save();
         }
         else {
