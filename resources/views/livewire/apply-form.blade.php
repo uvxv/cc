@@ -1,4 +1,5 @@
 <div>
+        <x-terms/>
         <!-- Form Header -->
         <div class="text-center">
             <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -29,7 +30,7 @@
                     <div class="relative z-10 bg-white p-1 rounded-full">
                         <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors duration-300 border-2"
                              :class="$wire.currentStep >= 2 ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-300 bg-white text-slate-500'">
-                            <span x-show="$wire.currentStep > 2"><i class="fas fa-check"></i></span>
+                            <span x-show="$wire.currentStep > 2"><i class="fas fa-check">2</i></span>
                             <span x-show="$wire.currentStep <= 2">2</span>
                         </div>
                     </div>
@@ -161,7 +162,7 @@
                                 </div>
                                 <div class="flex justify-between">
                                     <dt class="text-sm font-medium text-slate-500">Name</dt>
-                                    <dd class="text-sm font-semibold text-slate-900">{{ auth()->user()->name }}</dd>
+                                    <dd class="text-sm font-semibold text-slate-900">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</dd>
                                 </div>
                                 <div class="flex justify-between">
                                     <dt class="text-sm font-medium text-slate-500">Phone</dt>
@@ -185,24 +186,27 @@
                                 </div>
                             </dl>
                         </div>
-
+                        @error('terms')
+                            <span class="text-sm text-red-600">{{ $message }}</span>
+                        @enderror
                         <div class="flex items-start">
                             <div class="flex items-center h-5">
                                 <input id="terms" type="checkbox" wire:model="terms" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-slate-300 rounded">
                             </div>
                             <div class="ml-3 text-sm">
-                                <label for="terms" class="font-medium text-slate-700">I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-500">Terms and Conditions</a></label>
+                                <label for="terms" class="font-medium text-slate-700">I agree to the <a href="javascript:void(0)" onclick="showModal('terms');" class="text-indigo-600 hover:text-indigo-500">Terms and Conditions</a></label>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-
+            
             <!-- Footer / Navigation Buttons -->
             <div class="px-8 py-5 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
                 
                 <!-- Back Button -->
                 <button 
+                    type="button"
                     wire:click="decreaseStep" 
                     x-show="$wire.currentStep > 1" 
                     class="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
@@ -211,6 +215,7 @@
                 <div x-show="$wire.currentStep === 1"></div> <!-- Spacer -->
                 <!-- Next Button -->
                 <button 
+                    type="button"
                     wire:click="increaseStep" 
                     x-show="$wire.currentStep < 3"
                     class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
@@ -219,8 +224,9 @@
 
                 <!-- Submit Button -->
                 <button 
+                    type="button"
                     x-show="$wire.currentStep === 3"
-                    @click="alert('Form Submitted to Backend!')"
+                    wire:click="submit"
                     class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors transform hover:-translate-y-0.5">
                     Complete Registration <i class="fas fa-check ml-2"></i>
                 </button>

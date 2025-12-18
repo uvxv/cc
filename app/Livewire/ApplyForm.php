@@ -37,7 +37,7 @@ class ApplyForm extends Component
                 'vehicle_group' => "required|string|max:50",
             ],
             3 => [
-                'terms' => ['accepted'],
+                'terms' => "required|accepted",
             ],
         ];
     }
@@ -57,8 +57,7 @@ class ApplyForm extends Component
 
     public function submit(){
         $this->validate($this->rules()[$this->currentStep]);    
-        session()->flash('message', 'Registration successful!');
-        return redirect()->route('dashboard');
+        return dd($this->currentStep);
     }
 
     public function render(){
