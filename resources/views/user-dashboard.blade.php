@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <x-nofication />
+                    <x-nofication :notifications="auth()->user()->notifications"/>
                     <form method="POST" action="{{ route('login.logout') }}" class="inline">
                         @csrf
                         <button type="submit" class="text-sm text-white bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md transition">Logout</button>
@@ -45,11 +45,11 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {{-- @if (Auth::user()->license()->doesntExist())
+            @if (Auth::user()->license()->doesntExist())
                 <x-license-apply/>
-            @endif  --}}
+            @endif 
             <!-- Left Column: Driving License -->
-            @if (Auth::user()->license()->doesntexist())
+            @if (Auth::user()->license()->exists())
             <div class="lg:col-span-7 space-y-6">        
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative p-6">
                     <!-- Card Wrapper -->               
@@ -135,7 +135,7 @@
             </div>
             @endif
             <!-- Right Column: Stats & Penalties -->
-                @if (Auth::user()->license()->doesntexist())
+                @if (Auth::user()->license()->exists())
                     <x-penalty-panel/>
                 @endif
         </div>

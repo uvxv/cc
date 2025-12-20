@@ -1,9 +1,6 @@
 {{-- format-ignore-start --}}
 @props([
-    // where do you want the notification displayed
-    // available options are top-right, top-center, top-left, bottom-right, bottom-center, bottom-left
-    'position' => config('bladewind.notification.position', 'top-right'),
-    'nonce' => config('bladewind.script.nonce', null),
+    
 ])
 @php
     // [type] is replaced with the type of notification in notification.js

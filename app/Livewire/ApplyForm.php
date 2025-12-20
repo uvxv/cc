@@ -2,11 +2,11 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
+use App\Models\Application;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\ApplicationSubmited;
 
 class ApplyForm extends Component
 {
@@ -57,7 +57,20 @@ class ApplyForm extends Component
 
     public function submit(){
         $this->validate($this->rules()[$this->currentStep]);    
-        return dd($this->currentStep);
+        $medicalImagePath = $this->medical_image->store('medical_images', 'public');
+        $application = Application::create([
+            'phone' => $this->phone,
+            'province' => $this->province,
+            'medical_image' => $medicalImagePath,
+            'area' => $this->area,
+            'blood_type' => $this->blood_type,
+            'vehicle_group' => $this->vehicle_group,
+            'user_id' => Auth::id(),
+        ]);
+        
+        Auth::user()->notify(new ApplicationSubmited($application)); // to gokula, this is just a compiler error not a runtime error
+
+        return redirect()->route('userdashboard.index');
     }
 
     public function render(){

@@ -216,7 +216,7 @@
                     <div class="text-center">
                         <p class="text-sm text-[#5E5E5E]">
                             Already have an account? 
-                            <a href="{{ route('login.index') }}" class="font-semibold text-[#0E3CBD] hover:text-[#259FDE] transition-colors">Log in here</a>
+                            <a href="{{ route('login') }}" class="font-semibold text-[#0E3CBD] hover:text-[#259FDE] transition-colors">Log in here</a>
                         </p>
                     </div>
                 </form>

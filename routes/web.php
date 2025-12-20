@@ -7,7 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserDashboardController;
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'index')->name('login.index');
+    Route::get('/login', 'index')->name('login');
     Route::post('/login', 'authenticate')->name('login.authenticate');
     Route::post('/logout', 'logout')->name('login.logout');
 });

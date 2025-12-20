@@ -1,10 +1,6 @@
 <x-bladewind::dropmenu scrollable="true" header=true width="300px" >
     <h1 class="text-lg font-semibold p-4 border-b border-gray-200">Notifications</h1>
-    {{-- 
-        TRIGGER: The Bell Icon 
-        We use a raw HTML <button> here to allow for custom styling (removing standard button borders)
-        while keeping the accessibility of a button.
-    --}}
+
     <x-slot:trigger>
         <button type="button" class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none">
             <span class="sr-only">View notifications</span>
@@ -22,32 +18,21 @@
         BladeWind items can accept raw HTML for complex layouts (like notification text).
     --}}
 
-    {{-- Notification Item 1 --}}
-    <x-bladewind::dropmenu.item>
-        <div class="flex items-start justify-between min-w-[200px] gap-2">
-            <div class="flex flex-col gap-1">
-                <span class="font-semibold text-gray-800 text-sm">Project Update</span>
-                <span class="text-xs text-gray-500">Deployment to production was successful.</span>
-                <span class="text-[10px] text-gray-400 mt-1">2 mins ago</span>
-            </div>
-            <button type="button" class="ml-3 inline-flex items-center px-2 py-1 bg-black text-white text-xs rounded hover:bg-gray-800 focus:outline-none" aria-label="Mark as read">
-                Mark as read
-            </button>
-        </div>
-    </x-bladewind::dropmenu.item>
-
-    {{-- Notification Item 2 (with divider) --}}
-    <x-bladewind::dropmenu.item divider="true">
-        <div class="flex items-start justify-between min-w-[200px] gap-2">
-            <div class="flex flex-col gap-1">
-                <span class="font-semibold text-gray-800 text-sm">Project Update</span>
-                <span class="text-xs text-gray-500">Deployment to production was successful.</span>
-                <span class="text-[10px] text-gray-400 mt-1">2 mins ago</span>
-            </div>
-            <button type="button" class="ml-3 inline-flex items-center px-2 py-1 bg-black text-white text-xs rounded hover:bg-gray-800 focus:outline-none" aria-label="Mark as read">
-                Mark as read
-            </button>
-        </div>
-    </x-bladewind::dropmenu.item>
-
+    @if (!$notifications->isEmpty())
+        @foreach ( $notifications as $notification )
+            <x-bladewind::dropmenu.item divider="true">
+                <div class="flex items-start justify-between min-w-[200px] gap-2">
+                    <div class="flex flex-col gap-1">
+                        <span class="font-semibold text-gray-800 text-sm"></span>
+                        <span class="text-xs text-gray-500">{{ $notification->data['title'] }}</span>
+                        <span class="text-sm text-gray-600">{{ $notification->data['message'] }}</span>
+                        <span class="text-[10px] text-gray-400 mt-1">{{ $notification->created_at->diffForHumans() }}</span>
+                    </div>
+                    <button type="button" class="ml-3 inline-flex items-center px-2 py-1 bg-black text-white text-xs rounded hover:bg-gray-800 focus:outline-none" aria-label="Mark as read">
+                        Mark as read
+                    </button>
+                </div>
+            </x-bladewind::dropmenu.item>
+        @endforeach 
+    @endif
 </x-bladewind::dropmenu>

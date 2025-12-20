@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -26,6 +27,9 @@ class UserForm
                     TextInput::make('address')
                     ->required()
                     ->maxLength(255),
+                Toggle::make('is_admin')
+                    ->label('Administrator')
+                    ->default(false),
                 ]),
                 Section::make('Credentials')->schema([
                     TextInput::make('email')
@@ -48,7 +52,7 @@ class UserForm
                     ->maxSize(1024)
                     ->disk('public')
                     ->directory('Nic')
-                    ->required()
+                    ->nullable()
                     ->visibility('public')
                     ->label('Upload NIC Image'),
                 ])->columnSpan('full'),

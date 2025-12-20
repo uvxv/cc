@@ -25,7 +25,7 @@
             
             <nav>
                 @if (!Auth::check())
-                    <a href="{{ route('login.index') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Login</a>
+                    <a href="{{ route('login') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Login</a>
                     <a href="{{ route('register.index') }}" class="hover:bg-blue-400 text-sm font-bold hover:text-gray-200 transition">Register</a>
                 @endif
             </nav>

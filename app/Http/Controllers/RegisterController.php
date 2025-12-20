@@ -45,7 +45,7 @@ class RegisterController extends Controller
             // store on default disk (uses FILESYSTEM_DISK from .env)
             // For other devs: make sure to set up your filesystem properly
             $image = $request->file('id_image')->store('Nic', 'public');
-            $user->image = basename($image);
+            $user->image = $image;
             $user->save();
         }
         else {

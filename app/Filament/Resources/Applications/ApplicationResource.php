@@ -2,17 +2,18 @@
 
 namespace App\Filament\Resources\Applications;
 
-use App\Filament\Resources\Applications\Pages\CreateApplication;
+use BackedEnum;
+use Filament\Tables\Table;
+use App\Models\Application;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\Applications\Pages\EditApplication;
+use App\Filament\Resources\Applications\Pages\ViewApplication;
 use App\Filament\Resources\Applications\Pages\ListApplications;
+use App\Filament\Resources\Applications\Pages\CreateApplication;
 use App\Filament\Resources\Applications\Schemas\ApplicationForm;
 use App\Filament\Resources\Applications\Tables\ApplicationsTable;
-use App\Models\Application;
-use BackedEnum;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Table;
 
 class ApplicationResource extends Resource
 {
@@ -47,6 +48,7 @@ class ApplicationResource extends Resource
             'index' => ListApplications::route('/'),
             'create' => CreateApplication::route('/create'),
             'edit' => EditApplication::route('/{record}/edit'),
+            'view' => ViewApplication::route('/{record}'),
         ];
     }
 }
