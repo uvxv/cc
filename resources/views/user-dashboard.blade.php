@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>e-Licensing Dashboard</title>
-    <!-- Tailwind CSS (CDN for preview only - use 'npm run dev' in Laravel) -->
+    <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50 text-[#1C1C1C] font-sans antialiased">
@@ -13,7 +13,7 @@
     <!-- Top Navigation -->
     <nav class="bg-[#0E3CBD] shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center text-white font-bold text-xl tracking-tight">
                         <!-- Icon: Credit Card -->
@@ -23,7 +23,9 @@
                         E-Licensing
                     </div>
                 </div>
+
                 <div class="flex items-center space-x-4">
+                    <x-nofication />
                     <form method="POST" action="{{ route('login.logout') }}" class="inline">
                         @csrf
                         <button type="submit" class="text-sm text-white bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md transition">Logout</button>
@@ -43,11 +45,11 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            @if (Auth::user()->license()->doesntExist())
+            {{-- @if (Auth::user()->license()->doesntExist())
                 <x-license-apply/>
-            @endif 
+            @endif  --}}
             <!-- Left Column: Driving License -->
-            @if (Auth::user()->license()->exists())
+            @if (Auth::user()->license()->doesntexist())
             <div class="lg:col-span-7 space-y-6">        
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative p-6">
                     <!-- Card Wrapper -->               
@@ -133,7 +135,7 @@
             </div>
             @endif
             <!-- Right Column: Stats & Penalties -->
-                @if (Auth::user()->license()->exists())
+                @if (Auth::user()->license()->doesntexist())
                     <x-penalty-panel/>
                 @endif
         </div>
