@@ -22,10 +22,9 @@
                         </svg>
                         E-Licensing
                     </div>
-                </div>
-
+                </div>          
                 <div class="flex items-center space-x-4">
-                    <x-nofication :notifications="auth()->user()->notifications"/>
+                    <livewire:user-notifications/>
                     <form method="POST" action="{{ route('login.logout') }}" class="inline">
                         @csrf
                         <button type="submit" class="text-sm text-white bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md transition">Logout</button>

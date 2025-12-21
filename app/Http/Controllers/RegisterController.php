@@ -28,7 +28,7 @@ class RegisterController extends Controller
         }
         
         if(User::where('nic', $validatedData['nic'])->exists() || User::where('email', $validatedData['email'])->exists()){
-            return redirect()->route('login.index')->withErrors(['register_message' => 'NIC or Email already exists.'])->withInput();
+            return redirect()->route('login')->withErrors(['register_message' => 'NIC or Email already exists.'])->withInput();
         }
 
         $user = User::create([
@@ -51,6 +51,6 @@ class RegisterController extends Controller
         else {
             $user->save();
         }
-        return redirect()->route('login.index')->with('success', 'Registration successful!');
+        return redirect()->route('login')->with('success', 'Registration successful!');
     }
 }

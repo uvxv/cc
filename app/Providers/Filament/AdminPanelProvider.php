@@ -27,6 +27,10 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandLogo(asset('storage/app/logo.jpg'))
+            ->brandName('E-License')
+            ->favicon(asset('storage/app/logo.jpg'))
+            ->brandLogoHeight('50px')
             ->login()
             ->colors([
                 'primary' => Color::Blue,

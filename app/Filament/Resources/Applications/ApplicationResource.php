@@ -8,12 +8,17 @@ use App\Models\Application;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
+use Filament\Schemas\Components\Section;
+use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\Applications\Pages\EditApplication;
 use App\Filament\Resources\Applications\Pages\ViewApplication;
 use App\Filament\Resources\Applications\Pages\ListApplications;
 use App\Filament\Resources\Applications\Pages\CreateApplication;
 use App\Filament\Resources\Applications\Schemas\ApplicationForm;
 use App\Filament\Resources\Applications\Tables\ApplicationsTable;
+use Dom\Text;
+use Filament\Infolists\Components\ImageEntry;
+use Tests\TestCase;
 
 class ApplicationResource extends Resource
 {
@@ -42,6 +47,51 @@ class ApplicationResource extends Resource
         ];
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make('Applicant Details')
+                    
+                    ->components([
+                        TextEntry::make('Applicant Name')
+                            ->label('Full Name')
+                            ->weight('bold')
+                            ->state(fn (Application $record) => $record->user->first_name.' '.$record->user->last_name),
+                        TextEntry::make('user.email')
+                            ->label('Email Address')
+                            ->weight('bold'),
+                        TextEntry::make('phone')
+                            ->label('Phone Number')
+                            ->weight('bold'),
+                        TextEntry::make('user.address')
+                            ->label('Address')
+                            ->weight('bold'),
+                        ImageEntry::make('user.image')
+                            ->label('Applicant NIC')
+                            ->disk('public'),
+                    
+                    ])->columnSpan(2),
+                Section::make('Application Details')
+                    ->components([
+                        TextEntry::make('province')
+                            ->label('Province')
+                            ->weight('bold'),
+                        TextEntry::make('area')
+                            ->label('Area')
+                            ->weight('bold'),
+                        TextEntry::make('blood_type')
+                            ->label('Blood Type')
+                            ->weight('bold'),
+                        TextEntry::make('vehicle_group')
+                            ->label('Vehicle Group')
+                            ->weight('bold'),
+                        ImageEntry::make('medical_image')
+                            ->label('Medical Report')
+                            ->disk('public'),
+                    ])->columnSpan(2),
+            ])->columns(4);
+    }
     public static function getPages(): array
     {
         return [
@@ -51,4 +101,6 @@ class ApplicationResource extends Resource
             'view' => ViewApplication::route('/{record}'),
         ];
     }
+
+    
 }

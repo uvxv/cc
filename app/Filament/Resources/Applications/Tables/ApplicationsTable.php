@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Applications\Tables;
 
 use Filament\Tables\Table;
+use App\Models\Application;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -18,6 +19,7 @@ class ApplicationsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->poll('15s')
             ->columns([
                 TextColumn::make('Name')
                 ->state(fn ($record) => $record->user->first_name.' '.$record->user->last_name)
@@ -49,12 +51,13 @@ class ApplicationsTable
             ])
             ->recordActions([
                 Action::make('Approve')
+                    ->visible(fn ($record) => $record->status !== 'approved')
                     ->color('success')
                     ->requiresConfirmation()
                     ->button()
                     ->icon('heroicon-o-check-circle')
                     ->action(function ($record) {
-                        // $record->update(['status' => 'approved']);
+                        $record->update(['status' => 'approved']);
                         $record->user->notify(new ApplicationApproved());
                     }),
                 ActionGroup::make([

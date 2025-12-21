@@ -13,6 +13,7 @@ class Application extends Model
         'area',
         'blood_type',
         'vehicle_group',
+        'status',
         'user_id',
     ];
 
