@@ -99,7 +99,9 @@
                     </label>
                 </div>
                 @error('failed')
+                <div class="flex justify-center">
                     <span class="text-sm text-red-600">{{ $message }}</span>
+                </div>
                 @enderror
                 <!-- Submit Button -->
                 <button 

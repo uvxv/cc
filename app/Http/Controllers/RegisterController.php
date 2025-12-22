@@ -19,8 +19,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255',
             'nic' => 'required|string|max:50',
             'password' => 'required|string|min:8|confirmed',
-            'address' => 'nullable|string|max:500',
-            'id_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'address' => 'required|string|max:500',
+            'id_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if($request->password !== $request->password_confirmation){
@@ -28,7 +28,7 @@ class RegisterController extends Controller
         }
         
         if(User::where('nic', $validatedData['nic'])->exists() || User::where('email', $validatedData['email'])->exists()){
-            return redirect()->route('login.index')->withErrors(['register_message' => 'NIC or Email already exists.'])->withInput();
+            return redirect()->route('login')->withErrors(['register_message' => 'NIC or Email already exists.'])->withInput();
         }
 
         $user = User::create([
@@ -38,18 +38,19 @@ class RegisterController extends Controller
             'nic' => $validatedData['nic'],
             'password' => bcrypt($validatedData['password']),
             'address' => $validatedData['address'] ?? null,
+            
         ]);
 
         if ($request->hasFile('id_image')) {
             // store on default disk (uses FILESYSTEM_DISK from .env)
             // For other devs: make sure to set up your filesystem properly
-            $image = $request->file('id_image')->store('nic');
+            $image = $request->file('id_image')->store('Nic', 'public');
             $user->image = $image;
             $user->save();
         }
         else {
             $user->save();
         }
-        return redirect()->route('login.index')->with('success', 'Registration successful!');
+        return redirect()->route('login')->with('success', 'Registration successful!');
     }
 }
