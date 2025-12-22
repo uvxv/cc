@@ -32,14 +32,7 @@ class ApplicationsTable
                     ->label('Province')
                     ->searchable(),
                 TextColumn::make('area')
-                    ->label('Area')
-                    ->searchable(),
-                TextColumn::make('blood_type')  
-                    ->label('Blood Type')
-                    ->searchable(),
-                TextColumn::make('vehicle_group')
-                    ->label('Vehicle Group')
-                    ->formatStateUsing(fn($state) => str_replace('_', ' ', (string) $state))
+                    ->label('Medical Office Area')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->label('Applied At')
@@ -51,7 +44,7 @@ class ApplicationsTable
             ])
             ->recordActions([
                 Action::make('Approve')
-                    ->visible(fn ($record) => $record->status !== 'approved')
+                    ->visible(fn ($record) => $record->status !== 'approved' && $record->status !== 'rejected')
                     ->color('success')
                     ->requiresConfirmation()
                     ->button()

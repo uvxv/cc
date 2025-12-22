@@ -63,6 +63,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasMany(Penalty::class, 'user_id', 'id');
     }
 
+    // explicit policy for filament admin access
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {

@@ -78,7 +78,7 @@ class ApplicationResource extends Resource
                             ->label('Province')
                             ->weight('bold'),
                         TextEntry::make('area')
-                            ->label('Area')
+                            ->label('Medical Office Area')
                             ->weight('bold'),
                         TextEntry::make('blood_type')
                             ->label('Blood Type')

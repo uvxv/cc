@@ -20,10 +20,10 @@
                                 </x-bladewind.button>
                             </div>
                         @else
-                            <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                                 <x-bladewind.button 
                                     tag="a" 
-                                    href="{{ route('login.index') }}"
+                                    href="{{ route('login') }}"
                                     size="small"
                                     color="blue">
                                     Login

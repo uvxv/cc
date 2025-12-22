@@ -23,5 +23,5 @@ Route::get('/userdashboard', [UserDashboardController::class, 'index'])
 ->name('userdashboard.index');
 
 Route::get('apply', ApplyForm::class)
--> middleware('auth')
+-> middleware(['auth', 'form:checksubmission'])
 ->name('apply.form');

@@ -22,7 +22,7 @@ class ViewApplication extends ViewRecord
                 ->visible(fn ($record) => $record->status !== 'approved')
                 ->icon('heroicon-o-check-circle')
                 ->action(function ($record){
-                    $record->update(['status' => 'approved'])->save();
+                    $record->update(['status' => 'approved']);
                     $record->user->notify(new ApplicationApproved($record));
                 }),
         ];
