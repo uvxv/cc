@@ -7,13 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penalty extends Model
 {
-    protected $fillable = [
-        'location',
-        'amount',
-        'date_issued',
-        'status',
-        'user_id',
-    ];
+    protected $guarded = [];
 
     public function user()
     {

@@ -19,8 +19,8 @@ use App\Filament\Resources\Applications\Tables\ApplicationsTable;
 use Dom\Text;
 use Filament\Infolists\Components\ImageEntry;
 use Tests\TestCase;
-
-class ApplicationResource extends Resource
+ 
+class ApplicationResource extends Resource 
 {
     protected static ?string $model = Application::class;
 

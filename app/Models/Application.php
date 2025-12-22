@@ -6,16 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $fillable = [
-        'phone',
-        'province',
-        'medical_image',
-        'area',
-        'blood_type',
-        'vehicle_group',
-        'status',
-        'user_id',
-    ];
+    protected $guarded = [];
 
     public function user()
     {

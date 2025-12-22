@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('licenses', function (Blueprint $table) {
             $table->id('license_id');
             $table->string('type');
-            $table->integer('number');
+            $table->string('number',12);
             $table->date('issue_date');
             $table->date('expiry_date');
             $table->string('category');

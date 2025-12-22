@@ -6,14 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LicenseApplication extends Model
 {
-    protected $fillable = [
-        'license_number',
-        'issue_date',
-        'expiry_date',
-        'category',
-        'image',
-        'user_id',
-    ];
+    protected $guarded = [];
 
     public function user()
     {
