@@ -61,7 +61,7 @@
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative p-6">
                     <!-- Card Wrapper -->               
                     <div class="flex justify-between items-center mb-4">
-                        @if(!auth()->user()->license())
+                        @if (Auth::user()->license()->exists())
                         <h2 class="text-lg font-semibold text-brand-dark flex items-center">
                             <!-- Icon: Badge Check -->
                             <svg class="w-5 h-5 mr-2 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -107,10 +107,11 @@
                             </div>
                             <!-- Chip & Number -->
                             <div class="flex justify-between items-center my-2 z-10">
-                                <div class="w-10 h-8 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded-md shadow-inner border border-yellow-600/30 opacity-90"></div>
+                                <div class="w-10 h-8 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded-md shadow-inner border border-yellow-600/30 opacity-90">
+                                </div>
                                 <div class="text-right">
                                     <div class="text-[9px] uppercase opacity-70">License No</div>
-                                    <div class="font-mono text-lg tracking-widest font-bold shadow-black drop-shadow-sm">B1234567</div>
+                                    <div class="font-mono text-lg tracking-widest font-bold shadow-black drop-shadow-sm">B{{ auth()->user()->license->number }}</div>
                                 </div>
                             </div>
 
@@ -118,7 +119,7 @@
                             <div class="grid grid-cols-3 gap-2 z-10 mt-auto">
                                 <div class="col-span-2">
                                     <div class="text-[9px] uppercase opacity-70">Name</div>
-                                    <div class="font-semibold text-sm sm:text-base truncate">A. B. PERERA</div>
+                                    <div class="font-semibold text-sm sm:text-base truncate">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</div>
                                 </div>
                                 <div class="col-span-1">
                                     <!-- Photo Placeholder -->
@@ -126,11 +127,11 @@
                                 </div>
                                 <div>
                                     <div class="text-[9px] uppercase opacity-70">Issued</div>
-                                    <div class="text-xs font-medium">2023.01.01</div>
+                                    <div class="text-xs font-medium">{{ auth()->user()->license->issue_date }}</div>
                                 </div>
                                 <div>
                                     <div class="text-[9px] uppercase opacity-70">Expires</div>
-                                    <div class="text-xs font-medium">2033.01.01</div>
+                                    <div class="text-xs font-medium">{{ auth()->user()->license->expiry_date }}</div>
                                 </div>
                             </div>
                         </div>
@@ -163,8 +164,8 @@
                 
                 <div class="bg-white p-4 rounded-xl border-2 border-dashed border-brand-blue/30 inline-block mb-4">
                     <!-- Placeholder QR SVG -->
-                    <svg class="w-48 h-48 text-brand-dark" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 15h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v2h-3v-2zm-3 2h2v2h-2v-2zm3 2h3v2h-3v-2zm-3 2h2v2h-2v-2zM10 3h2v2h-2V3zm0 5h2v2h-2V8zm0 5h2v2h-2v-2zm0 5h2v2h-2v-2z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-48 h-48 text-brand-dark">
+                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 15h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v2h-3v-2zm-3 2h2v2h-2v-2zm3 2h3v2h-3v-2zm-3 2h2v2h-2v-2zM10 3h2v2h-2V3zm0 5h2v2h-2V8zm0 5h2v2h-2v-2zm0 5h2v2h-2v-2z"/>
                     </svg>
                 </div>
             </div>
