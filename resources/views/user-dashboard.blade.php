@@ -5,13 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>e-Licensing Dashboard</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <x-bladewind::notification />
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50 text-[#1C1C1C] font-sans antialiased">
-
+    
+    @error('formerror') 
+        <script> 
+        setTimeout(() => {
+            showNotification('Already Submitted', "{{ $message }}", 'error', 5000);
+            }, 1000);  
+        </script> 
+    @enderror
     <!-- Top Navigation -->
     <nav class="bg-[#0E3CBD] shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,11 +45,6 @@
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        @error('formerror')
-            <script>
-                showNotification('Already Submitted', "{{ $message }}", 'error', 5000);
-            </script>
-        @enderror
         <!-- Welcome Section -->
         <div class="mb-8">
             <h1 class="text-2xl font-bold text-brand-dark">Hello {{ auth()->user()->first_name}}!</h1>

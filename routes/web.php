@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\ApplyForm;
+use App\Livewire\ApplyLicense;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -22,6 +23,10 @@ Route::get('/userdashboard', [UserDashboardController::class, 'index'])
 -> middleware('auth')
 ->name('userdashboard.index');
 
-Route::get('apply', ApplyForm::class)
--> middleware(['auth', 'form:checksubmission'])
+Route::get('/apply', ApplyForm::class)
+-> middleware(['auth', 'form_checksubmission'])
 ->name('apply.form');
+
+Route::get('/add', ApplyLicense::class)
+-> middleware(['auth', 'license_resubmission'])
+->name('apply.license');

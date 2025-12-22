@@ -3,13 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Application;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-
-class PreventReSubmission
+class CheckLicenseResubmission
 {
     /**
      * Handle an incoming request.
@@ -18,9 +15,10 @@ class PreventReSubmission
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $id = Auth::id();
-        if(Application::where('user_id', $id)->exists()) {
-            return redirect()->back()->withErrors(['formerror' => 'You have already submitted an application']);
+        $uerId = auth()->id();
+        $existingApplication = \App\Models\LicenseApplication::where('user_id', $uerId)->first();
+        if ($existingApplication) {
+            return redirect()->back()->withErrors(['formerror' => 'You have already submitted a license application.']);
         }
         return $next($request);
     }

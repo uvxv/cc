@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('licenses', function (Blueprint $table) {
-            $table->id('license_id');
-            $table->string('type');
-            $table->integer('number');
+        Schema::create('license_applications', function (Blueprint $table) {
+            $table->id();
+            $table->string('license_number', 12);
             $table->date('issue_date');
             $table->date('expiry_date');
             $table->string('category');
             $table->string('image');
+            $table->string('status')->in_array(['pending', 'approved', 'rejected'])->default('pending');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('licenses');
+        Schema::dropIfExists('license_applications');
     }
 };
