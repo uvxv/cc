@@ -37,6 +37,12 @@ class ListApplications extends ListRecords
                 ->modifyQueryUsing(function (Builder $query): Builder {
                     return $query->where('status', 'approved');
                 }),
+            'Rejected' => Tab::make()
+                ->icon('heroicon-o-x-circle')
+                ->iconPosition('after')
+                ->modifyQueryUsing(function (Builder $query): Builder {
+                    return $query->where('status', 'rejected');
+                }),
             
         ];
     }

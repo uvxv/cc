@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('blood_type', 3);
             $table->string('vehicle_group', 50);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('status')->in_array(['pending', 'approved'])->default('pending');
+            $table->string('status')->in_array(['pending', 'approved','rejected'])->default('pending');
             $table->timestamps();
         });
     }
