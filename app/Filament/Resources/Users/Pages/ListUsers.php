@@ -16,7 +16,7 @@ class ListUsers extends ListRecords
     {
         
         return [
-            CreateAction::make(),
+            CreateAction::make()->authorize('create'),
         ];
     }
 }

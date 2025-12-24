@@ -14,8 +14,8 @@ class EditLicenseApplication extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            ViewAction::make()->authorize('view', $this->record),
+            DeleteAction::make()->authorize('delete', $this->record),
         ];
     }
 }

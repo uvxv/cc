@@ -27,9 +27,6 @@ class UserForm
                     TextInput::make('address')
                     ->required()
                     ->maxLength(255),
-                Toggle::make('is_admin')
-                    ->label('Administrator')
-                    ->default(false),
                 ]),
                 Section::make('Credentials')->schema([
                     TextInput::make('email')

@@ -24,7 +24,7 @@ class ViewApplication extends ViewRecord
                 ->action(function ($record){
                     $record->update(['status' => 'approved']);
                     $record->user->notify(new ApplicationApproved($record));
-                }),
+                })->authorize('approve'),
         ];
     }
 }

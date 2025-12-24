@@ -11,7 +11,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements FilamentUser, HasName
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -56,19 +56,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasMany(Penalty::class, 'user_id', 'id');
     }
 
-    // explicit policy for filament admin access
-    public function canAccessPanel(Panel $panel): bool
-    {
-        if ($panel->getId() === 'admin') {
-            return $this->is_admin;
-        }
-        return false;
-    }
 
-    public function getFilamentName(): string
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
 
     public function licenceApplications()
     {
