@@ -12,6 +12,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Forms\Concerns\InteractsWithForms;
+use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 
 class Settings extends Page implements HasForms
 {
@@ -61,6 +62,22 @@ class Settings extends Page implements HasForms
                     ->label('Confirm New Password')
                     ->revealable()
                     ->required(fn() => ! empty($this->data['new_password'])),
+                Action::make('save')
+                    ->label('Save Changes')
+                    ->submit('save')
+                    ->button()
+                    ->color('primary')
+                    ->size('md')
+                    ->icon('heroicon-o-check')
+                    ->ratelimit(3)
+                    ->rateLimitedNotification(
+                        function (TooManyRequestsException $exception): Notification {
+                            return Notification::make()
+                                ->warning()
+                                ->title('Slow down!')
+                                ->body("You can try deleting again in {$exception->secondsUntilAvailable} seconds.");
+                        }
+                    ),
 
             ])
             ->statePath('data');
@@ -107,14 +124,5 @@ class Settings extends Page implements HasForms
 
         return;
     }
-
-    protected function getFormActions(): array
-    {
-        return [
-            Action::make('save')
-                ->label('Save Changes')
-                ->submit('save')
-                , // Submits the form named 'save'
-        ];
-    }
+    
 }
