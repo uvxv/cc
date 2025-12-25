@@ -17,6 +17,7 @@ class Settings extends Page implements HasForms
 {
     use InteractsWithForms;
 
+    protected static ?int $navigationSort = 5;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
     protected string $view = 'filament.pages.settings';
 
@@ -26,7 +27,7 @@ class Settings extends Page implements HasForms
     public function mount(): void
     {
         // Fill the form with the current user's data
-        $this->form->fill(auth()->user()->attributesToArray());
+        $this->form->fill();
     }
 
     public function form(Schema $form): Schema
@@ -40,22 +41,26 @@ class Settings extends Page implements HasForms
                     ->required()
                     ->default(fn() =>  auth()->user()->last_name),
                 TextInput::make('email')
+                    ->readonly()
                     ->email()
                     ->default(fn() =>  auth()->user()->email)
                     ->required(),
                 TextInput::make('current_password')
                     ->password()
                     ->label('Current Password')
-                    ->dehydrated(false),
+                    ->required(fn() => ! empty($this->data['new_password']))
+                    ->revealable(),
                 TextInput::make('new_password')
                     ->password()
                     ->label('New Password')
                     ->minLength(8)
-                    ->dehydrated(false),
+                    ->revealable()
+                    ->required(fn() => ! empty($this->data['new_password_confirmation'])),
                 TextInput::make('new_password_confirmation')
                     ->password()
                     ->label('Confirm New Password')
-                    ->dehydrated(false),
+                    ->revealable()
+                    ->required(fn() => ! empty($this->data['new_password'])),
 
             ])
             ->statePath('data');
@@ -65,9 +70,10 @@ class Settings extends Page implements HasForms
     {
         $data = $this->form->getState();
 
-        // Handle password change if provided
-        if (! empty($data['new_password'])) {
-            if (empty($data['current_password']) || ! Hash::check($data['current_password'], auth()->user()->password)) {
+        
+        if(isset($data['new_password']) && !empty($data['new_password'])) {
+            // Validate current password
+            if (! Hash::check($data['current_password'], auth()->user()->password)) {
                 Notification::make()
                     ->danger()
                     ->title('Current password is incorrect')
@@ -76,28 +82,30 @@ class Settings extends Page implements HasForms
                 return;
             }
 
-            if (($data['new_password'] ?? '') !== ($data['new_password_confirmation'] ?? '')) {
+            
+            if ($data['new_password'] !== $data['new_password_confirmation']) {
                 Notification::make()
                     ->danger()
-                    ->title('New password confirmation does not match')
+                    ->title('New password and confirmation do not match')
                     ->send();
 
                 return;
             }
 
+            // Update password
             $data['password'] = Hash::make($data['new_password']);
         }
-
-        // Remove password-only fields from data before mass-assignment
+        
         unset($data['current_password'], $data['new_password'], $data['new_password_confirmation']);
 
-        // Update the currently logged-in user
         auth()->user()->update($data);
 
         Notification::make()
             ->success()
             ->title('Settings updated successfully')
             ->send();
+
+        return;
     }
 
     protected function getFormActions(): array
@@ -105,7 +113,8 @@ class Settings extends Page implements HasForms
         return [
             Action::make('save')
                 ->label('Save Changes')
-                ->submit('save'), // Submits the form named 'save'
+                ->submit('save')
+                , // Submits the form named 'save'
         ];
     }
 }

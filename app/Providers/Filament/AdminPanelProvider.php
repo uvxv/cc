@@ -32,7 +32,6 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('storage/app/logo.jpg'))
             ->brandLogoHeight('50px')
             ->login()
-            ->profile()
             ->authGuard('admin')
             ->colors([
                 'primary' => Color::Blue,

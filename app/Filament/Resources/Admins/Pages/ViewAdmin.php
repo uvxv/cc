@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Admins\Pages;
 
 use App\Filament\Resources\Admins\AdminResource;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -14,6 +15,8 @@ class ViewAdmin extends ViewRecord
     {
         return [
             EditAction::make()
+            ->authorize('manageAdmins'),
+            DeleteAction::make()
             ->authorize('manageAdmins'),
         ];
     }
