@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ApiUser;
+
 return [
 
     /*
@@ -44,6 +46,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'api_users',
+        ],
+        'web_api' => [
+            'driver' => 'session',
+            'provider' => 'api_users',
+        ],
     ],
 
     /*
@@ -73,10 +83,10 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'api_users' => [
+            'driver' => 'eloquent',
+            'model' => ApiUser::class,
+        ],
     ],
 
     /*
