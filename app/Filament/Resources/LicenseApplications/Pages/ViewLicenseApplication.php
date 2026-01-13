@@ -13,7 +13,7 @@ class ViewLicenseApplication extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()->authorize('update', $this->record),
         ];
     }
 }

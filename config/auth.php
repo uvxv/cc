@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ApiUser;
+
 return [
 
     /*
@@ -36,9 +38,21 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'api_users',
+        ],
+        'web_api' => [
+            'driver' => 'session',
+            'provider' => 'api_users',
         ],
     ],
 
@@ -60,15 +74,19 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'api_users' => [
+            'driver' => 'eloquent',
+            'model' => ApiUser::class,
+        ],
     ],
 
     /*

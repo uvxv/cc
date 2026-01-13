@@ -69,7 +69,7 @@ class LicenseApplicationsTable
                         ]);
                         $record->update(['status' => 'approved']);
                         $record->user->notify(new LicenseAddedNotification());
-                    }),
+                    })->authorize('approve'),
                 Action::make('Reject')
                     ->visible(fn ($record) => $record->status !== 'rejected' && $record->status !== 'approved')
                     ->color('danger')
@@ -78,16 +78,16 @@ class LicenseApplicationsTable
                     ->icon('heroicon-o-x-circle')
                     ->action(function ($record) {
                         $record->update(['status' => 'rejected']);
-                    }),
+                    })->authorize('reject'),
                 ActionGroup::make([
-                    EditAction::make(),
-                    ViewAction::make(),
-                    DeleteAction::make(),
+                    EditAction::make()->authorize('update'),
+                    ViewAction::make()->authorize('view'),
+                    DeleteAction::make()->authorize('delete'),
                 ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->authorize('delete'),
                 ]),
             ]);
     }

@@ -2,7 +2,9 @@
 
 use App\Livewire\ApplyForm;
 use App\Livewire\ApplyLicense;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserDashboardController;
@@ -30,3 +32,19 @@ Route::get('/apply', ApplyForm::class)
 Route::get('/add', ApplyLicense::class)
 -> middleware(['auth', 'license_resubmission'])
 ->name('apply.license');
+
+
+Route::get('/token/login', [ApiController::class, 'login'])
+->name('token.login');
+
+Route::controller(ApiController::class)
+    ->prefix('token')
+    ->name('token.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index')->middleware('auth:web_api');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::post('authenticate', 'authenticate')->name('authenticate');
+        Route::delete('revoke/{id}', 'revoke')->name('revoke');
+        Route::post('logout', 'logout')->name('logout');
+    });
