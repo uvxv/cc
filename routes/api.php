@@ -2,7 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\PenaltyController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+
+Route::prefix('v1')
+->group(function () {
+    Route::get('/penalties', [PenaltyController::class, 'index']);
+    Route::post('/penalties', [PenaltyController::class, 'store']);
+    Route::get('/penalties/{id}', [PenaltyController::class, 'show']);
+    Route::put('/penalties/{id}', [PenaltyController::class, 'update']);
+    Route::delete('/penalties/{id}', [PenaltyController::class, 'destroy']);
+});

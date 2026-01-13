@@ -33,19 +33,18 @@ Route::get('/add', ApplyLicense::class)
 -> middleware(['auth', 'license_resubmission'])
 ->name('apply.license');
 
-Route::get('/token', [ApiController::class, 'index'])
-->name('token.index');
-
-Route::get('/token/create', [ApiController::class, 'create'])
-->name('token.create');
-
-Route::post('/token/store', [ApiController::class, 'store'])
-->name('token.store');
 
 Route::get('/token/login', [ApiController::class, 'login'])
 ->name('token.login');
 
-Route::post('/token/authenticate', [ApiController::class, 'authenticate'])
-->name('token.authenticate');
-
-Route::get('/whoami', function(){ return get_class(Auth::user() ?? auth()->guard('api')->user()); })->middleware('auth');
+Route::controller(ApiController::class)
+    ->prefix('token')
+    ->name('token.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index')->middleware('auth:web_api');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::post('authenticate', 'authenticate')->name('authenticate');
+        Route::delete('revoke/{id}', 'revoke')->name('revoke');
+        Route::post('logout', 'logout')->name('logout');
+    });

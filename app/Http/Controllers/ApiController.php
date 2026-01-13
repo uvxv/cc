@@ -64,4 +64,27 @@ class ApiController extends Controller
             ->with('token', $token->plainTextToken);
         
     }
+
+    public function revoke($id)
+    {
+        $user = Auth::guard('web_api')->user();
+        $token = $user->tokens()->where('id', $id)->first();
+
+        if ($token) {
+            $token->delete();
+        }
+
+        return redirect()->route('token.index');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web_api')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('token.login');
+    }
 }

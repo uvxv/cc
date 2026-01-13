@@ -37,14 +37,14 @@
                                 </div>
                             </div>
                             <div class="flex flex-none items-center gap-x-3">
-                                <button class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all">
-                                    <i data-lucide="refresh-cw" class="h-4 w-4 mr-2 text-gray-500"></i>
-                                    Regenerate
-                                </button>
+                                <form method="POST" action="{{ route('token.revoke', $token->id) }}">
+                                @csrf
+                                @method('DELETE')
                                 <button class="inline-flex items-center rounded-md bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 shadow-sm ring-1 ring-inset ring-red-200 hover:bg-red-100 transition-all">
                                     <i data-lucide="trash-2" class="h-4 w-4 mr-2"></i>
                                     Revoke
                                 </button>
+                                </form>
                             </div>
                         </li>
 

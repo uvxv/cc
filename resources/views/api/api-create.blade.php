@@ -44,12 +44,12 @@
                                 </div>
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        <input id="candidates" name="abilities[]" value="read:payments" type="checkbox"
+                                        <input id="candidates" name="abilities[]" value="read:penalty" type="checkbox"
                                             class="h-4 w-4 rounded border-gray-300 text-[#F05340] focus:ring-[#F05340]">
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="candidates" class="font-medium text-gray-900">Read Access
-                                            (read:payments)</label>
+                                            (read:penalty)</label>
                                         <p class="text-gray-500">Allows read access to payment resources.
                                         </p>
                                     </div>
@@ -57,13 +57,26 @@
 
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        <input id="candidates" name="abilities[]" value="read:application" type="checkbox"
+                                        <input id="candidates" name="abilities[]" value="create:penalty" type="checkbox"
                                             class="h-4 w-4 rounded border-gray-300 text-[#F05340] focus:ring-[#F05340]">
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
-                                        <label for="candidates" class="font-medium text-gray-900">Read Access
-                                            (read:application)</label>
-                                        <p class="text-gray-500">Allows read access to application resources.
+                                        <label for="candidates" class="font-medium text-gray-900">Create Access
+                                            (create:penalty)</label>
+                                        <p class="text-gray-500">Allows create access to penalty resources.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="relative flex items-start">
+                                    <div class="flex h-6 items-center">
+                                        <input id="candidates" name="abilities[]" value="delete:penalty" type="checkbox"
+                                            class="h-4 w-4 rounded border-gray-300 text-[#F05340] focus:ring-[#F05340]">
+                                    </div>
+                                    <div class="ml-3 text-sm leading-6">
+                                        <label for="candidates" class="font-medium text-gray-900">Delete Access
+                                            (delete:penalty)</label>
+                                        <p class="text-gray-500">Allows create access to penalty resources.
                                         </p>
                                     </div>
                                 </div>

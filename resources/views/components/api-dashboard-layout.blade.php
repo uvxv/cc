@@ -34,10 +34,16 @@
                 <!-- Profile / Right Section -->
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                         <div class="relative ml-3">
+                        <div class="relative ml-3">
                             <div class="flex items-center gap-3">
                                 <span class="text-sm font-medium text-gray-300">Student Dev</span>
                                 <img class="h-8 w-8 rounded-full bg-gray-800" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="">
+                                <form method="POST" action="{{ route('token.logout') }}">
+                                    @csrf
+                                    <button type="submit" class="ml-2 inline-flex items-center rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">
+                                        Logout
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
