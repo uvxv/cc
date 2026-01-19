@@ -20,7 +20,8 @@ class ApiUsersTable
                 TextColumn::make('last_name')
                     ->searchable(),
                 TextColumn::make('access_id')
-                    ->searchable(),
+                    ->searchable()
+                    ->copyable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -20,13 +20,18 @@ class ApiUserResource extends Resource
 {
     protected static ?string $model = ApiUser::class;
 
-    protected static ?string $modelLabel = 'License';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-s-user-group';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?string $modelLabel = 'API User';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 4;
 
-    protected static ?string $recordTitleAttribute = 'ApiUser';
+    protected static ?string $recordTitleAttribute = 'email';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
 
     public static function form(Schema $schema): Schema
     {

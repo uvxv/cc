@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\ApiUsers\Pages;
 
-use App\Filament\Resources\ApiUsers\ApiUserResource;
 use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\ViewRecord;
+use App\Filament\Resources\ApiUsers\ApiUserResource;
 
 class ViewApiUser extends ViewRecord
 {
@@ -14,6 +15,8 @@ class ViewApiUser extends ViewRecord
     {
         return [
             EditAction::make(),
+            DeleteAction::make()
+            ->authorize('delete'),
         ];
     }
 }

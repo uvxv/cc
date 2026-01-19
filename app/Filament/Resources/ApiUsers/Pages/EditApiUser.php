@@ -15,7 +15,8 @@ class EditApiUser extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
+            DeleteAction::make()
+            ->authorize('delete'),
         ];
     }
 }
