@@ -40,10 +40,11 @@
                                 <form method="POST" action="{{ route('token.revoke', $token->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="inline-flex items-center rounded-md bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 shadow-sm ring-1 ring-inset ring-red-200 hover:bg-red-100 transition-all">
-                                    <i data-lucide="trash-2" class="h-4 w-4 mr-2"></i>
-                                    Revoke
-                                </button>
+                                <div class="w-full flex justify-center">
+                                    <button class="inline-flex items-center rounded-md bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 shadow-sm ring-1 ring-inset ring-red-200 hover:bg-red-100 transition-all">
+                                        Revoke
+                                    </button>
+                                </div>
                                 </form>
                             </div>
                         </li>

@@ -29,9 +29,9 @@
             <!-- Form -->
             <form class="space-y-6" action="{{route('token.authenticate')}}" method="POST"> 
                 @csrf
-                <!-- NIC Field -->
+                <!-- Access ID -->
                 <div class="space-y-2">
-                    <label for="nic" class="text-sm font-semibold text-[#1a1a1a]">Access ID</label>
+                    <label for="access_id" class="text-sm font-semibold text-[#1a1a1a]">Access ID</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                             <!-- Icon: Credit Card -->

@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\v1\PenaltyController;
 
 Route::prefix('v1')
 ->group(function () {
-    Route::get('/penalties', [PenaltyController::class, 'index']);
+    Route::get('/penalties', [PenaltyController::class, 'index'])->middleware('auth:sanctum');
     Route::post('/penalties', [PenaltyController::class, 'store']);
     Route::get('/penalties/{id}', [PenaltyController::class, 'show']);
     Route::put('/penalties/{id}', [PenaltyController::class, 'update']);
