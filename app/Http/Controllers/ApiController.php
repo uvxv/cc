@@ -33,12 +33,12 @@ class ApiController extends Controller
             'password' => $validated['password'],
         ])) {
             $request->session()->regenerate();
-
             return redirect()->route('token.index');
         } 
 
         return back()->withErrors(['access_id' => 'The provided credentials do not match our records.']);
     }
+    
     public function create()
     {
         return view('api.api-create');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\PenaltyResource;
 use App\Models\Penalty;
+use Laravel\Dusk\Page;
 
 class PenaltyController extends Controller
 {
@@ -14,7 +15,7 @@ class PenaltyController extends Controller
      */
     public function index()
     {
-        return;
+        return PenaltyResource::collection(Penalty::all());
     }
 
     /**
