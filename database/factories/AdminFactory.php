@@ -33,9 +33,9 @@ class AdminFactory extends Factory
         return [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
-            'email' => '123@gmailcom',
+            'email' => 'admin@gmail.com',
             'password' => static::$password ??= Hash::make('password'),
-            'role' => 'admin',
+            'role' => 'superadmin',
             'created_at' => now(),
         ];
     }
