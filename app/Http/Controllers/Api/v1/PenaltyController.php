@@ -14,7 +14,7 @@ class PenaltyController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    { 
         return PenaltyResource::collection(Penalty::all());
     }
 
