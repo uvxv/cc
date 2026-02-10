@@ -14,7 +14,7 @@ class AdminFactory extends Factory
     /**
      * The current password being used by the factory.
      */
-    protected static ?string $password = null;
+    protected static ?string $password = "password";
 
     /**
      * The name of the factory's corresponding model.
@@ -34,7 +34,7 @@ class AdminFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'email' => 'admin@gmail.com',
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password,
             'role' => 'superadmin',
             'created_at' => now(),
         ];
