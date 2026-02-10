@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin>
@@ -34,7 +35,7 @@ class AdminFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'email' => 'admin@gmail.com',
-            'password' => 'password',
+            'password' => Hash::make(self::$password),
             'role' => 'superadmin',
             'created_at' => now(),
         ];
