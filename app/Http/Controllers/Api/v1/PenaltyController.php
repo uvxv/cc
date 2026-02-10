@@ -15,6 +15,7 @@ class PenaltyController extends Controller
      */
     public function index()
     { 
+        $this->authorize('viewAny', Penalty::class);
         return PenaltyResource::collection(Penalty::all());
     }
 
@@ -23,7 +24,9 @@ class PenaltyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Penalty::class);
+        $model = Penalty::create($request->all());
+        return response()->json($model, 201);
     }
 
     /**
@@ -31,7 +34,9 @@ class PenaltyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $model = Penalty::findOrFail($id);
+        $this->authorize('view', $model);
+        return response()->json(new PenaltyResource($model));
     }
 
     /**
@@ -39,7 +44,10 @@ class PenaltyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $model = Penalty::findOrFail($id);
+        $this->authorize('update', $model);
+        $model->update($request->all());
+        return response()->json($model);
     }
 
     /**
@@ -47,6 +55,9 @@ class PenaltyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $model = Penalty::findOrFail($id);
+        $this->authorize('delete', $model);
+        $model->delete();
+        return response()->json(null, 204);
     }
 }
